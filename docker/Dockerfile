@@ -46,6 +46,7 @@ RUN chown www-data:www-data $APP_DIR
 
 COPY --chown=www-data:www-data ./ .
 COPY --chown=www-data:www-data .env.example .env
+RUN touch database/database.sqlite
 RUN rm -rf vendor
 RUN composer install --no-interaction
 #RUN php artisan key:generate
