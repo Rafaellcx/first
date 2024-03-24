@@ -1,66 +1,94 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## About
+First Decision test. This project is a web application that utilizes the Laravel framework on the back-end and a PostgreSQL database for data storage.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Objectives
+### User Registration with PHP, Laravel, and PostgreSQL
+The focus of this project is to create a user registration functionality with the following requirements:
 
-## About Laravel
+### Registration Page (Laravel/Blade):
+Create a user registration page with the following fields:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Name (required, minimum 3 characters, maximum 50 characters).
+- Email (required, must be a valid email address).
+- Password (required, minimum 6 characters, maximum 20 characters).
+- Confirm Password (required and must match the password).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Validations (Laravel):
+- Use the validation tools provided by Laravel to validate the form fields.
+- Display appropriate error messages when fields do not meet the specified rules above.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Model and Migration (Laravel):
+- Create a model and migration to store users in the PostgreSQL database.
+- Configure the table to store user information.
 
-## Learning Laravel
+### Back-end API (Laravel):
+- Create a RESTful API in Laravel to process user registration.
+- Validate data received from the request, including password confirmation.
+- Store registered users in the PostgreSQL database.
+- Return an appropriate response to the front-end (e.g., success or error) in JSON format.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Unit Tests (Laravel/PHP):
+- Write at least one unit test for the Laravel API to ensure data is validated correctly and stored in the PostgreSQL database.
+- Use the Laravel testing tool for this purpose.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Error Handling (Laravel):
+- Implement appropriate error handling in the Laravel API to handle communication failures with the front-end.
+- Return error responses in JSON format.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Solution
 
-## Laravel Sponsors
+Made using the Laravel 10 framework, PostgreSQL, Nginx, SQLite for tests and
+Docker for application containerization.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## How to run the project
 
-### Premium Partners
+After downloading the **first** repository, being in its main folder, go up the structure composed of the following containers:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- **first-back:** Composed with nginx and PHP, being exposed to port `9000`;
+- **first-db:** With the PostgreSQL database.
 
-## Contributing
+1) Through the following commands:
+```sh 
+docker-compose build
+```
+```sh 
+docker-compose up -d
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+After finishing the creation of the containers, we must execute the commands below so that the environment is ready to be used:
 
-## Code of Conduct
+1. Used to create tables of the solution:
+   ```sh 
+   docker exec -it first-back php artisan migrate
+   ```
+   ![](images/migrate.png)
+2. 
+3. Used to create tables in SQLite to be used in the tests:
+    ```sh
+    docker exec -it first-back php artisan migrate:fresh --env=testing
+    ```
+   ![](images/migrate-test.png)
+4. 
+5. To execute the tests, use the command below:
+    ```sh
+    docker exec -it first-back php artisan test --env=testing
+    ```
+Some tests were created as an example:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+![](images/tests.png)
 
-## Security Vulnerabilities
+Now we can use the application through the address "http://127.0.0.1:9000/register" to register a user.
+For this simple screen, a View with Blade was used according to the requirements of the test. It is worth highlighting the customization of the icon and description of the tab, it turned out well, didn't it?
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+![](images/register.png)
 
-## License
+In this second example, we can observer the validations in action:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![](images/register-with-validations.png)
+
+After inputting all the data correctly, we will have a confirmation message as shown in the image below:
+
+![](images/register-confirmation.png)
+
+To conclude, we can access the address "http://localhost:9000/request-docs/" where we can visualize and test all user endpoints.
+NOTE: If you are on the user registration page, you can directly access the above address by clicking "First Decision".
