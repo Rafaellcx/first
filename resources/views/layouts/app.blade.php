@@ -34,7 +34,7 @@
     <body class="hold-transition register-page">
         <div class="register-box">
             <div class="register-logo">
-                <a href="{{ url(':9000/request-docs') }}"><b>First Decision</b></a>
+                <a href="{{ url('http://localhost:9000/request-docs/') }}"><b>First Decision</b></a>
             </div>
                 <div id="app">
                     @yield('content')

@@ -92,3 +92,54 @@ After inputting all the data correctly, we will have a confirmation message as s
 
 To conclude, we can access the address "http://localhost:9000/request-docs/" where we can visualize and test all user endpoints.
 NOTE: If you are on the user registration page, you can directly access the above address by clicking "First Decision".
+
+![](images/request-docs.png)
+
+![](images/request-docs-post-api-user.png)
+
+![](images/request-docs-post-api-user-ok.png)
+
+## Endpoints
+
+
+| USER                         |        |                                                |
+|------------------------------|--------|------------------------------------------------|
+| List all users               | GET    | http://127.0.0.1:9000/api/user                 |
+| Find all users with paginate | GET    | http://127.0.0.1:9000/api/user?paginate=1      |
+| Find a user point by id      | GET    | http://127.0.0.1:9000/api/user/{id}            |
+| Save a use                   | POST   | http://127.0.0.1:9000/api/user                 |
+| Change Password              | POST   | http://127.0.0.1:9000/api/user/change-password |
+| Update a user                | PUT    | http://127.0.0.1:9000/api/user/{id}            |
+| Delete a user                | DELETE | http://127.0.0.1:9000/api/user/{id}            |
+
+
+## JSON structure for the following endpoints
+
+### Save a user (all attributes are required):
+```sh
+{
+  {
+	"name": "john",
+	"password": "johntest",
+	"email": "john@gmail.com",
+	"password_confirmation": "johntest"
+
+}
+}
+```
+### Update a user:
+```sh
+{
+	"id": 1,
+	"name": "john",
+	"email": "john@gmail.com",
+}
+```
+### Change password (all attributes are required):
+```sh
+{
+	"id": 1,
+	"password": "johntest",
+	"password_confirmation": "johntest"
+}
+```
