@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  postgres:
+     build:
+       context: .
+       dockerfile: ./docker/postgres/Dockerfile
+     container_name: first-db
+     image: first-db
+     environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: first
+     ports:
+        - "5432:5432"
+     networks:
+        - net-first
+
+  first-back:
+    container_name: first-back
+    image: first-back
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      args:
+        PHP_VERSION: '8.2.3-fpm-bullseye'
+    ports:
+      - "9000:80" #http
+      - "443:443" #https
+    networks:
+      - net-first
+
+
+networks:
+  net-first:
+    driver: bridge
