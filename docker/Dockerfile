@@ -24,8 +24,8 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql pgsql session xml
 
 # habilita instalação do Redis
-RUN pecl install redis-${REDIS_LIB_VERSION} \
-    && docker-php-ext-enable redis
+#RUN pecl install redis-${REDIS_LIB_VERSION} \
+#    && docker-php-ext-enable redis
 
 RUN docker-php-ext-install zip iconv simplexml pcntl gd fileinfo
 
